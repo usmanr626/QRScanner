@@ -14,7 +14,6 @@ const AppNavigation = () => {
       <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Group>
           <Stack.Screen name="Home" component={TabNavigation} />
-          <Stack.Screen name="GenerateQRs" component={GenerateQR} />
         </Stack.Group>
       </Stack.Navigator>
     </NavigationContainer>
