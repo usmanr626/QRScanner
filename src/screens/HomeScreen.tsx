@@ -1,27 +1,44 @@
-import React, {useRef, useState} from 'react';
+import React, {useRef, useState, useEffect} from 'react';
 import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  Linking,
   Alert,
+  Linking,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native';
 import colors from '../assets/colors';
 import {WIDTH} from '../assets/styles';
 
 import QRCodeScanner from 'react-native-qrcode-scanner';
-import {RNCamera} from 'react-native-camera';
-import {LABELS} from '../labels';
+import {LABELS, getLabels, updateLabels} from '../labels';
+import {useNavigation, useRoute, useIsFocused} from '@react-navigation/native';
+
+import SettingsButton from '../Components/SettingsButton';
 
 const HomeScreen = () => {
+  const route = useRoute();
+  const {params} = route;
+  const selectedLanguage = params ? params.selectedLanguage : 'english'; // Default to 'english' if selectedLanguage is not provided
+  let labels = getLabels(selectedLanguage);
+
   //states
   const [openScanner, setOpenScanner] = useState(false);
-
   const QRScanRef = useRef();
 
+  const navigation = useNavigation(); // Use useNavigation hook to get navigation object
+  const isFocused = useIsFocused();
+
+  useEffect(() => {
+    // Update labels when screen is focused
+    if (isFocused) {
+      labels = getLabels(selectedLanguage);
+    }
+  }, [isFocused, selectedLanguage]);
+
   const toggleScanner = () => {
-    setOpenScanner(!openScanner);
+    // setOpenScanner(!openScanner);
+    // navigation.navigate('SettingsScreen');
   };
 
   const onSuccess = e => {
@@ -73,6 +90,7 @@ const HomeScreen = () => {
           <Text>{LABELS.touchToScan}</Text>
         </TouchableOpacity>
       )}
+      <SettingsButton onPress={() => navigation.navigate('SettingsScreen')} />
     </View>
   );
 };

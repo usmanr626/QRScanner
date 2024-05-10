@@ -143,9 +143,9 @@ const TabNavigation = () => {
                 source={ImagePath.scanIcon}
                 style={[
                   styles.iconStyle,
-                  // {tintColor: focused ? '#007AFF' : '#8E8E93'},
+                  {tintColor: focused ? '#007AFF' : '#8E8E93'},
                 ]}
-                resizeMode="center"
+                resizeMode="contain"
               />
               <Text style={{color: focused ? '#007AFF' : '#8E8E93'}}>
                 {LABELS.scanCode}
@@ -165,9 +165,9 @@ const TabNavigation = () => {
                 style={[
                   styles.iconStyle,
 
-                  // {tintColor: focused ? '#007AFF' : '#8E8E93'},
+                  {tintColor: focused ? '#007AFF' : '#8E8E93'},
                 ]}
-                resizeMode="center"
+                resizeMode="contain"
               />
               <Text style={{color: focused ? '#007AFF' : '#8E8E93'}}>
                 {LABELS.createCode}
@@ -187,7 +187,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
-    height: 70,
+    height: 90,
     backgroundColor: '#FFFFFF', // Change the background color of the tab bar here
     borderTopWidth: 1, // Add a border to the top of the tab bar
     borderTopColor: '#E0E0E0', // Set the border color

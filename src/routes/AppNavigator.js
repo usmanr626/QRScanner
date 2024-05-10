@@ -5,6 +5,7 @@ import {StyleSheet} from 'react-native';
 import HomeScreen from '../screens/HomeScreen';
 import TabNavigation from './TabNavigation';
 import GenerateQR from '../screens/GenerateQR';
+import SettingsScreen from '../screens/SettingsScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -14,6 +15,7 @@ const AppNavigation = () => {
       <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Group>
           <Stack.Screen name="Home" component={TabNavigation} />
+          <Stack.Screen name="SettingsScreen" component={SettingsScreen} />
         </Stack.Group>
       </Stack.Navigator>
     </NavigationContainer>
