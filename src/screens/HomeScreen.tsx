@@ -37,7 +37,7 @@ const HomeScreen = () => {
   }, [isFocused, selectedLanguage]);
 
   const toggleScanner = () => {
-    // setOpenScanner(!openScanner);
+    setOpenScanner(!openScanner);
     // navigation.navigate('SettingsScreen');
   };
 
