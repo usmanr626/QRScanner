@@ -5,7 +5,9 @@ const ENGLISH = {
     goToLink: 'Go to this link?',
     ok: 'OK',
     touchToScan: 'Touch here to scan',
-    selectLanguage:'Select Language'
+    selectLanguage:'Select Language',
+    pasteLink:'Paste your link or text here'
+    ,generate:'Generate'
 }
 
 const SPANISH = {
@@ -15,7 +17,9 @@ const SPANISH = {
     goToLink: '¿Ir a este enlace?',
     ok: 'Aceptar',
     touchToScan: 'Toque aquí para escanear',
-    selectLanguage:'Seleccionar idioma'
+    selectLanguage:'Seleccionar idioma',
+    pasteLink:'Pega tu enlace o texto aquí'
+    ,generate:'generar'
 }
 
 const CHINESE = {
@@ -26,6 +30,8 @@ const CHINESE = {
     ok: '好',
     touchToScan: '点击这里扫描',
     selectLanguage:'选择语言'
+    ,pasteLink:'粘贴你的链接或文字在这里'
+    ,generate:"生成"
 }
 
 const GERMAN = {
@@ -36,6 +42,8 @@ const GERMAN = {
     ok: 'OK',
     touchToScan: 'Hier tippen, um zu scannen',
     selectLanguage:'Sprache auswählen'
+    ,pasteLink:'Füge deinen Link oder Text hier ein'
+    ,generate:'generieren'
 }
 
 const ARABIC = {
@@ -45,7 +53,9 @@ const ARABIC = {
     goToLink: 'الذهاب إلى هذا الرابط؟',
     ok: 'موافق',
     touchToScan: 'اضغط هنا للمسح',
-    selectLanguage:'تحديد اللغة'
+    selectLanguage:'تحديد اللغة',
+    pasteLink: "الصق الرابط أو النص هنا"
+    ,generate: "توليد"
 }
 
 const PORTUGUESE = {
@@ -55,7 +65,9 @@ const PORTUGUESE = {
     goToLink: 'Ir para este link?',
     ok: 'OK',
     touchToScan: 'Toque aqui para escanear',
-    selectLanguage:'Selecionar idioma'
+    selectLanguage:'Selecionar idioma',
+    pasteLink:'Cole o seu link ou texto aqui'
+    ,generate: 'gerar'
 }
 
 const FRENCH = {
@@ -65,7 +77,9 @@ const FRENCH = {
     goToLink: 'Aller à ce lien ?',
     ok: 'OK',
     touchToScan: 'Appuyez ici pour scanner',
-    selectLanguage:'Sélectionner la langue'
+    selectLanguage:'Sélectionner la langue',
+    pasteLink:"Collez votre lien ou texte ici"
+    ,generate: "générer"
 }
 
  export const getLabels = (language) => {
