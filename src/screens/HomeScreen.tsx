@@ -40,7 +40,15 @@ const HomeScreen = () => {
     setOpenScanner(!openScanner);
     // navigation.navigate('SettingsScreen');
   };
-
+  const openLink = () => {
+    try {
+      Linking.openURL(e.data).catch(err =>
+        console.error('An error occured', err),
+      );
+    } catch (error) {
+      console.log('🎯: openLink -> error', error);
+    }
+  };
   const onSuccess = e => {
     console.log('🎯: HomeScreen -> e', e);
 
@@ -50,16 +58,15 @@ const HomeScreen = () => {
         onPress: () => {
           setTimeout(() => {
             QRScanRef.current.reactivate();
-          }, 1000);
+          }, 1500);
         },
         style: 'cancel',
       },
       {
         text: LABELS.ok,
-        onPress: () =>
-          Linking.openURL(e.data).catch(err =>
-            console.error('An error occured', err),
-          ),
+        onPress: () => {
+          openLink;
+        },
       },
     ]);
   };
@@ -69,7 +76,7 @@ const HomeScreen = () => {
       {openScanner ? (
         <QRCodeScanner
           ref={QRScanRef}
-          reactivateTimeout={10000}
+          reactivateTimeout={3000}
           showMarker
           fadeIn
           onRead={onSuccess}

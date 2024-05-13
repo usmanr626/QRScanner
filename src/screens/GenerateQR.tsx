@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, SafeAreaView} from 'react-native';
 import colors from '../assets/colors';
 import QRCode from 'react-native-qrcode-svg';
 // import Barcode from 'react-native-barcode-builder';
@@ -7,8 +7,13 @@ import QRCode from 'react-native-qrcode-svg';
 const GenerateQR = () => {
   return (
     <View style={styles.mainContainer}>
+      <SafeAreaView />
       <Text>GENERATE</Text>
-      <QRCode value="Just some string value" backgroundColor="red" size={200} />
+      <QRCode
+        value="Just some string value"
+        backgroundColor="grey"
+        size={200}
+      />
       {/* <Barcode value="Hello World" format="CODE128" />; */}
     </View>
   );
