@@ -7,7 +7,9 @@ const ENGLISH = {
     touchToScan: 'Touch here to scan',
     selectLanguage:'Select Language',
     pasteLink:'Paste your link or text here'
-    ,generate:'Generate'
+    ,generate:'Generate',
+    selectImage:'Select an Image (optional), for QR Code only',
+    selectFormat:'Select a Code Format (default CODE128), for BAR Code only'
 }
 
 const SPANISH = {
@@ -19,7 +21,9 @@ const SPANISH = {
     touchToScan: 'Toque aquí para escanear',
     selectLanguage:'Seleccionar idioma',
     pasteLink:'Pega tu enlace o texto aquí'
-    ,generate:'generar'
+    ,generate:'generar',
+    selectImage:'Seleccionar una imagen (opcional), solo para código QR',
+    selectFormat:'Seleccionar un formato de código (predeterminado CODE128), solo para código de barras'
 }
 
 const CHINESE = {
@@ -31,7 +35,9 @@ const CHINESE = {
     touchToScan: '点击这里扫描',
     selectLanguage:'选择语言'
     ,pasteLink:'粘贴你的链接或文字在这里'
-    ,generate:"生成"
+    ,generate:"生成",
+    selectImage:"选择图像（可选），仅适用于二维码",
+    selectFormat:"选择代码格式（ 默认为CODE128 ) .仅适用于条形码"
 }
 
 const GERMAN = {
@@ -43,7 +49,10 @@ const GERMAN = {
     touchToScan: 'Hier tippen, um zu scannen',
     selectLanguage:'Sprache auswählen'
     ,pasteLink:'Füge deinen Link oder Text hier ein'
-    ,generate:'generieren'
+    ,generate:'generieren',
+    selectImage:"Wähle ein Bild (optional), nur für QR-Code",
+    selectFormat:"Wähle ein Code-Format (Standard CODE128), nur für Barcode"
+
 }
 
 const ARABIC = {
@@ -55,7 +64,10 @@ const ARABIC = {
     touchToScan: 'اضغط هنا للمسح',
     selectLanguage:'تحديد اللغة',
     pasteLink: "الصق الرابط أو النص هنا"
-    ,generate: "توليد"
+    ,generate: "توليد",
+    selectImage:"اختر صورة (اختياري)، فقط لرمز الاستجابة السريعة",
+    selectFormat:"اختر تنسيق الرمز (الافتراضي CODE128)، فقط لرمز الباركود"
+
 }
 
 const PORTUGUESE = {
@@ -67,7 +79,10 @@ const PORTUGUESE = {
     touchToScan: 'Toque aqui para escanear',
     selectLanguage:'Selecionar idioma',
     pasteLink:'Cole o seu link ou texto aqui'
-    ,generate: 'gerar'
+    ,generate: 'gerar',
+    selectImage:"Selecionar uma imagem (opcional), apenas para código QR",
+    selectFormat:"Selecionar um formato de código (padrão CODE128), apenas para código de barras"
+
 }
 
 const FRENCH = {
@@ -79,7 +94,10 @@ const FRENCH = {
     touchToScan: 'Appuyez ici pour scanner',
     selectLanguage:'Sélectionner la langue',
     pasteLink:"Collez votre lien ou texte ici"
-    ,generate: "générer"
+    ,generate: "générer",
+    selectImage:"Sélectionner une image (optionnel), uniquement pour code QR",
+    selectFormat: "Sélectionner un format de code (par défaut CODE128), uniquement pour code-barres"
+
 }
 
  export const getLabels = (language) => {
