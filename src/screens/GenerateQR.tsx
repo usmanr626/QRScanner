@@ -21,6 +21,11 @@ import {LABELS, getLabels} from '../labels';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import {WIDTH} from '../assets/styles';
 import {Picker} from '@react-native-picker/picker';
+import {BannerAd, BannerAdSize, TestIds} from 'react-native-google-mobile-ads';
+
+import Config from 'react-native-config';
+
+const adUnitId = __DEV__ ? Config.DEV_AD_UNIT_ID : Config.PROD_AD_UNIT_ID;
 
 const GenerateQR = () => {
   const route = useRoute();
@@ -112,6 +117,13 @@ const GenerateQR = () => {
 
   return (
     <View style={styles.mainContainer}>
+      <View style={{position: 'absolute', top: 0}}>
+        <BannerAd
+          unitId={adUnitId}
+          size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}
+        />
+      </View>
+
       <SafeAreaView />
 
       {/* <QRCode

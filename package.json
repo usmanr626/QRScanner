@@ -18,6 +18,8 @@
     "react": "18.2.0",
     "react-native": "0.74.1",
     "react-native-camera": "^4.2.1",
+    "react-native-config": "^1.5.1",
+    "react-native-google-mobile-ads": "^13.3.0",
     "react-native-image-picker": "^7.1.2",
     "react-native-qrcode-scanner": "^1.5.5",
     "react-native-qrcode-svg": "^6.3.1",

@@ -1,4 +1,4 @@
-import React, {useRef, useState, useEffect} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {
   Alert,
   Linking,
@@ -10,11 +10,16 @@ import {
 import colors from '../assets/colors';
 import {WIDTH} from '../assets/styles';
 
+import {useIsFocused, useNavigation, useRoute} from '@react-navigation/native';
 import QRCodeScanner from 'react-native-qrcode-scanner';
-import {LABELS, getLabels, updateLabels} from '../labels';
-import {useNavigation, useRoute, useIsFocused} from '@react-navigation/native';
+import {LABELS, getLabels} from '../labels';
 
 import SettingsButton from '../Components/SettingsButton';
+
+import {BannerAd, BannerAdSize} from 'react-native-google-mobile-ads';
+import Config from 'react-native-config';
+
+const adUnitId = __DEV__ ? Config.DEV_AD_UNIT_ID : Config.PROD_AD_UNIT_ID;
 
 const HomeScreen = () => {
   const route = useRoute();
@@ -81,6 +86,12 @@ const HomeScreen = () => {
 
   return (
     <View style={styles.mainContainer}>
+      <View style={{position: 'absolute', top: 0}}>
+        <BannerAd
+          unitId={adUnitId}
+          size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}
+        />
+      </View>
       {openScanner ? (
         <QRCodeScanner
           ref={QRScanRef}

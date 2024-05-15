@@ -11,7 +11,7 @@ const BackButton = ({onPress}) => {
         position: 'absolute',
 
         // backgroundColor: 'red',
-        top: WIDTH * 0.15,
+        top: WIDTH * 0.18,
         left: WIDTH * 0.05,
         justifyContent: 'center',
         alignItems: 'center',

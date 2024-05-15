@@ -1,4 +1,8 @@
 {
   "name": "QRScanner",
-  "displayName": "QRScanner"
+  "displayName": "QRScanner",
+  "react-native-google-mobile-ads": {
+    "android_app_id": "ca-app-pub-3699157148112416~3466078384",
+    "ios_app_id": "ca-app-pub-xxxxxxxx~xxxxxxxx"
+  }
 }

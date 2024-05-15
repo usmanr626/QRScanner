@@ -5,6 +5,10 @@ import BackButton from '../Components/BackButton';
 import {useNavigation} from '@react-navigation/native';
 import {Picker} from '@react-native-picker/picker'; // Import Picker from @react-native-picker/picker
 import {LABELS, updateLabels} from '../labels';
+import {BannerAd, BannerAdSize, TestIds} from 'react-native-google-mobile-ads';
+import Config from 'react-native-config';
+
+const adUnitId = __DEV__ ? Config.DEV_AD_UNIT_ID : Config.PROD_AD_UNIT_ID;
 
 const SettingsScreen = () => {
   const navigation = useNavigation(); // Use useNavigation hook to get navigation object
@@ -19,6 +23,12 @@ const SettingsScreen = () => {
 
   return (
     <View style={styles.mainContainer}>
+      <View style={{position: 'absolute', top: 0}}>
+        <BannerAd
+          unitId={adUnitId}
+          size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}
+        />
+      </View>
       <BackButton
         onPress={() => navigation.navigate('Home', {selectedLanguage})}
       />
