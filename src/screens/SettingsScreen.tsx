@@ -21,6 +21,7 @@ const SettingsScreen = () => {
     updateLabels(value); // Update labels when language is changed
   };
 
+  console.log('🎯: SettingsScreen -> ');
   return (
     <View style={styles.mainContainer}>
       <View style={{position: 'absolute', top: 0}}>
