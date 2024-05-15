@@ -9,7 +9,13 @@ const ENGLISH = {
     pasteLink:'Paste your link or text here'
     ,generate:'Generate',
     selectImage:'Select an Image (optional), for QR Code only',
-    selectFormat:'Select a Code Format (default CODE128), for BAR Code only'
+    selectFormat:'Select a Code Format (default CODE128), for BAR Code only',
+    removeSelectedCode:"Remove Selected Code",
+    generateCodeError:'You can only choose to generate one type of code at a time',
+    pleaseEnter:'Please paste your text or link to generate a code',
+    pleaseChoose:'Please choose',
+    generateQR:'Generate QR Code',
+    generateBAR:'Generate BAR Code'
 }
 
 const SPANISH = {
@@ -23,7 +29,9 @@ const SPANISH = {
     pasteLink:'Pega tu enlace o texto aquí'
     ,generate:'generar',
     selectImage:'Seleccionar una imagen (opcional), solo para código QR',
-    selectFormat:'Seleccionar un formato de código (predeterminado CODE128), solo para código de barras'
+    selectFormat:'Seleccionar un formato de código (predeterminado CODE128), solo para código de barras',
+    removeSelectedCode: 'Eliminar el código seleccionado',
+generateCodeError: 'Solo puedes elegir generar un tipo de código a la vez'
 }
 
 const CHINESE = {
@@ -37,7 +45,9 @@ const CHINESE = {
     ,pasteLink:'粘贴你的链接或文字在这里'
     ,generate:"生成",
     selectImage:"选择图像（可选），仅适用于二维码",
-    selectFormat:"选择代码格式（ 默认为CODE128 ) .仅适用于条形码"
+    selectFormat:"选择代码格式（ 默认为CODE128 ) .仅适用于条形码",
+    removeSelectedCode: '删除选定的代码',
+    generateCodeError: '您一次只能选择生成一种代码'
 }
 
 const GERMAN = {
@@ -51,7 +61,9 @@ const GERMAN = {
     ,pasteLink:'Füge deinen Link oder Text hier ein'
     ,generate:'generieren',
     selectImage:"Wähle ein Bild (optional), nur für QR-Code",
-    selectFormat:"Wähle ein Code-Format (Standard CODE128), nur für Barcode"
+    selectFormat:"Wähle ein Code-Format (Standard CODE128), nur für Barcode",
+    removeSelectedCode: 'Ausgewählten Code entfernen',
+    generateCodeError: 'Sie können jeweils nur eine Art von Code generieren'
 
 }
 
@@ -66,7 +78,9 @@ const ARABIC = {
     pasteLink: "الصق الرابط أو النص هنا"
     ,generate: "توليد",
     selectImage:"اختر صورة (اختياري)، فقط لرمز الاستجابة السريعة",
-    selectFormat:"اختر تنسيق الرمز (الافتراضي CODE128)، فقط لرمز الباركود"
+    selectFormat:"اختر تنسيق الرمز (الافتراضي CODE128)، فقط لرمز الباركود",
+    removeSelectedCode: 'إزالة الكود المحدد',
+    generateCodeError: 'يمكنك اختيار توليد نوع واحد فقط من الأكواد في المرة الواحدة'
 
 }
 
@@ -81,7 +95,9 @@ const PORTUGUESE = {
     pasteLink:'Cole o seu link ou texto aqui'
     ,generate: 'gerar',
     selectImage:"Selecionar uma imagem (opcional), apenas para código QR",
-    selectFormat:"Selecionar um formato de código (padrão CODE128), apenas para código de barras"
+    selectFormat:"Selecionar um formato de código (padrão CODE128), apenas para código de barras",
+    removeSelectedCode: 'Remover código selecionado',
+    generateCodeError: 'Você só pode escolher gerar um tipo de código por vez'
 
 }
 
@@ -96,7 +112,10 @@ const FRENCH = {
     pasteLink:"Collez votre lien ou texte ici"
     ,generate: "générer",
     selectImage:"Sélectionner une image (optionnel), uniquement pour code QR",
-    selectFormat: "Sélectionner un format de code (par défaut CODE128), uniquement pour code-barres"
+    selectFormat: "Sélectionner un format de code (par défaut CODE128), uniquement pour code-barres",
+    removeSelectedCode: 'Supprimer le code sélectionné',
+    generateCodeError: 'Vous ne pouvez choisir de générer qu\'un seul type de code à la fois'
+    
 
 }
 

@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   Image,
   Modal,
+  Alert,
 } from 'react-native';
 import colors from '../assets/colors';
 import QRCode from 'react-native-qrcode-svg';
@@ -33,7 +34,9 @@ const GenerateQR = () => {
   // states
 
   const [userImage, setUserImage] = useState(null);
+  const [codeReady, setCodeReady] = useState(false);
   const [inputText, setInputText] = useState('');
+  const [codeType, setCodeType] = useState('');
 
   const [selectedFormat, setSelectedFormat] = useState(null);
   const [formatPicker, setFormatPicker] = useState(false);
@@ -67,8 +70,45 @@ const GenerateQR = () => {
   };
 
   const errorHandler = () => {
-    console.log('Adasdas');
+    Alert.alert(LABELS.generateCodeError);
   };
+
+  const generateQRHandler = () => {
+    console.log('🎯: generateQRHandler -> ');
+    setCodeReady(true);
+    setCodeType('QR');
+  };
+  const generateBarHandler = () => {
+    console.log('🎯: generateBarHandler -> ');
+    setCodeReady(true);
+    setCodeType('BAR');
+  };
+
+  const askUser = () => {
+    Alert.alert(LABELS.pleaseChoose, '', [
+      {
+        text: LABELS.generateQR,
+        onPress: () => {
+          generateQRHandler();
+        },
+      },
+      {
+        text: LABELS.generateBAR,
+        onPress: () => {
+          generateBarHandler();
+        },
+      },
+    ]);
+  };
+  const logoProps = userImage
+    ? {
+        logo: {uri: userImage},
+        logoSize: 20,
+        logoMargin: 1,
+        logoBackgroundColor: 'white',
+        quietZone: 5,
+      }
+    : {};
 
   return (
     <View style={styles.mainContainer}>
@@ -147,7 +187,15 @@ const GenerateQR = () => {
 
       <View style={{alignItems: 'center', top: '12%'}}>
         <TouchableOpacity
-          onPress={() => console.log('asd', inputText)}
+          onPress={() => {
+            inputText
+              ? userImage
+                ? generateQRHandler()
+                : selectedFormat
+                ? generateBarHandler()
+                : askUser()
+              : Alert.alert(LABELS.pleaseEnter);
+          }}
           style={{
             width: 250,
             height: 80,
@@ -183,50 +231,69 @@ const GenerateQR = () => {
           selectedValue={selectedFormat}
           style={styles.pickerStyle}
           onValueChange={handleFormatChange}>
-          <Picker.Item label="CODE39" value="CODE39" />
-          <Picker.Item label="CODE128" value="CODE128" />
-          <Picker.Item label="CODE128A" value="CODE128A" />
-          <Picker.Item label="CODE128B" value="CODE128B" />
-          <Picker.Item label="CODE128C" value="CODE128C" />
-          <Picker.Item label="EAN13" value="EAN13" />
-          <Picker.Item label="EAN8" value="EAN8" />
-          <Picker.Item label="EAN5" value="EAN5" />
-          <Picker.Item label="EAN2" value="EAN2" />
-          <Picker.Item label="UPC" value="UPC" />
-          <Picker.Item label="UPCE" value="UPCE" />
-          <Picker.Item label="ITF14" value="ITF14" />
-          <Picker.Item label="ITF" value="ITF" />
-          <Picker.Item label="MSI" value="MSI" />
-          <Picker.Item label="MSI10" value="MSI10" />
-          <Picker.Item label="MSI11" value="MSI11" />
-          <Picker.Item label="MSI1010" value="MSI1010" />
-          <Picker.Item label="MSI1110" value="MSI1110" />
-          <Picker.Item label="pharmacode" value="pharmacode" />
-          <Picker.Item label="codabar" value="codabar" />
-          <Picker.Item label="Remove" value={null} />
+          <Picker.Item
+            label={LABELS.removeSelectedCode}
+            color="red"
+            value={null}
+          />
+          <Picker.Item color="black" label="CODE39" value="CODE39" />
+          <Picker.Item color="black" label="CODE128" value="CODE128" />
+          <Picker.Item color="black" label="CODE128A" value="CODE128A" />
+          <Picker.Item color="black" label="CODE128B" value="CODE128B" />
+          <Picker.Item color="black" label="CODE128C" value="CODE128C" />
+          <Picker.Item color="black" label="EAN13" value="EAN13" />
+          <Picker.Item color="black" label="EAN8" value="EAN8" />
+          <Picker.Item color="black" label="EAN5" value="EAN5" />
+          <Picker.Item color="black" label="EAN2" value="EAN2" />
+          <Picker.Item color="black" label="UPC" value="UPC" />
+          <Picker.Item color="black" label="UPCE" value="UPCE" />
+          <Picker.Item color="black" label="ITF14" value="ITF14" />
+          <Picker.Item color="black" label="ITF" value="ITF" />
+          <Picker.Item color="black" label="MSI" value="MSI" />
+          <Picker.Item color="black" label="MSI10" value="MSI10" />
+          <Picker.Item color="black" label="MSI11" value="MSI11" />
+          <Picker.Item color="black" label="MSI1010" value="MSI1010" />
+          <Picker.Item color="black" label="MSI1110" value="MSI1110" />
+          <Picker.Item color="black" label="pharmacode" value="pharmacode" />
+          <Picker.Item color="black" label="codabar" value="codabar" />
           {/* Add more Picker.Item components for additional formats */}
         </Picker>
       )}
 
-      {/* <Modal
+      <Modal
         animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => setModalVisible(false)}>
-        <View style={styles.modalBackground}>
-          <View style={styles.modalContent}>
-            <Picker
-              selectedValue={selectedFormat}
-              style={{height: 200, width: '100%'}}
-              onValueChange={handleFormatChange}>
-              <Picker.Item label="Format 1" value="format1" />
-              <Picker.Item label="Format 2" value="format2" />
-             
-             
-            </Picker>
+        transparent={codeReady}
+        visible={codeReady}
+        onRequestClose={() => setCodeReady(false)}>
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+          <View
+            style={{
+              width: WIDTH * 0.9,
+              height: '95%',
+              borderRadius: 40,
+              backgroundColor: 'lightgrey',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            {codeType === 'QR' ? (
+              <QRCode
+                value={inputText}
+                // backgroundColor="grey"
+                size={120}
+                {...logoProps}
+              />
+            ) : codeType === 'BAR' ? (
+              <Barcode
+                format={selectedFormat ? selectedFormat : 'CODE128'}
+                value={inputText}
+                text={inputText}
+                style={{marginBottom: 40}}
+                maxWidth={200}
+              />
+            ) : null}
           </View>
         </View>
-      </Modal> */}
+      </Modal>
     </View>
   );
 };
