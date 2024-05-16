@@ -150,7 +150,7 @@ generateBAR: 'Générer un code-barres'
 }
 
  export const getLabels = (language) => {
-    console.log("🎯: getLabels -> language", language)
+    // console.log("🎯: getLabels -> language", language)
     switch (language) {
         case 'english':
             return ENGLISH;

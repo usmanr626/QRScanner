@@ -16,8 +16,8 @@ import {LABELS, getLabels} from '../labels';
 
 import SettingsButton from '../Components/SettingsButton';
 
-import {BannerAd, BannerAdSize} from 'react-native-google-mobile-ads';
 import Config from 'react-native-config';
+import {BannerAd, BannerAdSize} from 'react-native-google-mobile-ads';
 
 const adUnitId = __DEV__ ? Config.DEV_AD_UNIT_ID : Config.PROD_AD_UNIT_ID;
 
@@ -46,7 +46,7 @@ const HomeScreen = () => {
     // navigation.navigate('SettingsScreen');
   };
   const openLink = ({e}) => {
-    console.log('🎯: openLink -> e', e);
+    // console.log('🎯: openLink -> e', e);
 
     // Linking.openURL(e.data).catch(err =>
     //   console.error('An error occured', err),
@@ -59,11 +59,11 @@ const HomeScreen = () => {
         QRScanRef.current.reactivate();
       }, 1500);
     } catch (error) {
-      console.log('🎯: openLink -> error', error);
+      // console.log('🎯: openLink -> error', error);
     }
   };
   const onSuccess = e => {
-    console.log('🎯: HomeScreen -> e', e);
+    // console.log('🎯: HomeScreen -> e', e);
 
     Alert.alert(LABELS.goToLink, e.data, [
       {

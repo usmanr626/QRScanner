@@ -1,12 +1,12 @@
-import React, {useState} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import colors from '../assets/colors';
-import BackButton from '../Components/BackButton';
-import {useNavigation} from '@react-navigation/native';
 import {Picker} from '@react-native-picker/picker'; // Import Picker from @react-native-picker/picker
-import {LABELS, updateLabels} from '../labels';
-import {BannerAd, BannerAdSize, TestIds} from 'react-native-google-mobile-ads';
+import {useNavigation} from '@react-navigation/native';
+import React, {useState} from 'react';
+import {StyleSheet, Text, View} from 'react-native';
 import Config from 'react-native-config';
+import {BannerAd, BannerAdSize} from 'react-native-google-mobile-ads';
+import BackButton from '../Components/BackButton';
+import colors from '../assets/colors';
+import {LABELS, updateLabels} from '../labels';
 
 const adUnitId = __DEV__ ? Config.DEV_AD_UNIT_ID : Config.PROD_AD_UNIT_ID;
 
@@ -16,12 +16,12 @@ const SettingsScreen = () => {
 
   // Function to handle language change
   const handleLanguageChange = value => {
-    console.log('🎯: SettingsScreen -> value', value);
+    // console.log('🎯: SettingsScreen -> value', value);
     setSelectedLanguage(value);
     updateLabels(value); // Update labels when language is changed
   };
 
-  console.log('🎯: SettingsScreen -> ');
+  // console.log('🎯: SettingsScreen -> ');
   return (
     <View style={styles.mainContainer}>
       <View style={{position: 'absolute', top: 0}}>

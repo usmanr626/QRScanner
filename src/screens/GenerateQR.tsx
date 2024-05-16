@@ -1,31 +1,39 @@
+import Barcode from '@kichiyaki/react-native-barcode-generator';
+import {Picker} from '@react-native-picker/picker';
+import {useIsFocused, useNavigation, useRoute} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
 import {
-  View,
-  Text,
-  StyleSheet,
-  SafeAreaView,
-  TextInput,
-  Button,
-  TouchableOpacity,
+  Alert,
   Image,
   Modal,
-  Alert,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
 } from 'react-native';
-import colors from '../assets/colors';
+import {
+  AdEventType,
+  BannerAd,
+  BannerAdSize,
+  InterstitialAd,
+} from 'react-native-google-mobile-ads';
+import {launchImageLibrary} from 'react-native-image-picker';
 import QRCode from 'react-native-qrcode-svg';
-import Barcode from '@kichiyaki/react-native-barcode-generator';
-import ImagePath from '../Constants/ImagePath';
 import SettingsButton from '../Components/SettingsButton';
-import {useNavigation, useRoute, useIsFocused} from '@react-navigation/native';
-import {LABELS, getLabels} from '../labels';
-import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import colors from '../assets/colors';
 import {WIDTH} from '../assets/styles';
-import {Picker} from '@react-native-picker/picker';
-import {BannerAd, BannerAdSize, TestIds} from 'react-native-google-mobile-ads';
+import {LABELS, getLabels} from '../labels';
 
 import Config from 'react-native-config';
 
 const adUnitId = __DEV__ ? Config.DEV_AD_UNIT_ID : Config.PROD_AD_UNIT_ID;
+const InterAdUnitId = __DEV__
+  ? Config.DEV_INTERSTITIAL_AD_UNIT_ID
+  : Config.PROD_INTERSTITIAL_AD_UNIT_ID;
+
+const interstitial = InterstitialAd.createForAdRequest(InterAdUnitId);
 
 const GenerateQR = () => {
   const route = useRoute();
@@ -43,6 +51,11 @@ const GenerateQR = () => {
   const [inputText, setInputText] = useState('');
   const [codeType, setCodeType] = useState('');
 
+  //for ad
+
+  const [loaded, setLoaded] = useState(false);
+  const [reloadAd, setReloadAd] = useState(false);
+
   const [selectedFormat, setSelectedFormat] = useState(null);
   const [formatPicker, setFormatPicker] = useState(false);
 
@@ -52,6 +65,42 @@ const GenerateQR = () => {
       labels = getLabels(selectedLanguage);
     }
   }, [isFocused, selectedLanguage]);
+
+  useEffect(() => {
+    console.log('🎯: Ad use effect ');
+    const unsubscribe = interstitial.addAdEventListener(
+      AdEventType.LOADED,
+      () => {
+        setLoaded(true);
+
+        console.log('🎯: Ad Loaded ');
+      },
+    );
+
+    interstitial.addAdEventListener(AdEventType.CLICKED, () => {
+      console.log('🎯: Ad Clicked -> ');
+    });
+    interstitial.addAdEventListener(AdEventType.OPENED, () => {
+      console.log('🎯: Ad Opened -> ');
+    });
+    interstitial.addAdEventListener(AdEventType.CLOSED, () => {
+      console.log('🎯: Ad Closed -> ');
+      // setReloadAd(!reloadAd);
+      interstitial.load();
+    });
+    interstitial.addAdEventListener(AdEventType.ERROR, e => {
+      console.log('🎯: Ad Error -> ', e);
+    });
+    interstitial.addAdEventListener(AdEventType.PAID, e => {
+      console.log('🎯: Ad Paid -> ', e);
+    });
+
+    // Start loading the interstitial straight away
+    interstitial.load();
+
+    // Unsubscribe from events on unmount
+    return unsubscribe;
+  }, [reloadAd]);
 
   const imageHandler = async () => {
     const result = await launchImageLibrary({
@@ -80,13 +129,25 @@ const GenerateQR = () => {
 
   const generateQRHandler = () => {
     console.log('🎯: generateQRHandler -> ');
-    setCodeReady(true);
-    setCodeType('QR');
+    if (loaded) {
+      interstitial.show();
+      setLoaded(false);
+    }
+    setTimeout(() => {
+      setCodeReady(true);
+      setCodeType('QR');
+    }, 1000);
   };
   const generateBarHandler = () => {
     console.log('🎯: generateBarHandler -> ');
-    setCodeReady(true);
-    setCodeType('BAR');
+    if (loaded) {
+      interstitial.show();
+      setLoaded(false);
+    }
+    setTimeout(() => {
+      setCodeReady(true);
+      setCodeType('BAR');
+    }, 1000);
   };
 
   const askUser = () => {
@@ -208,6 +269,10 @@ const GenerateQR = () => {
                 : askUser()
               : Alert.alert(LABELS.pleaseEnter);
           }}
+          // onPress={() => {
+          //   // interstitial.load(),
+          //   interstitial.show();
+          // }}
           style={{
             width: 250,
             height: 80,
