@@ -18,6 +18,7 @@ import SettingsButton from '../Components/SettingsButton';
 
 import Config from 'react-native-config';
 import {BannerAd, BannerAdSize} from 'react-native-google-mobile-ads';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const adUnitId = __DEV__ ? Config.DEV_AD_UNIT_ID : Config.PROD_AD_UNIT_ID;
 
@@ -62,6 +63,54 @@ const HomeScreen = () => {
       // console.log('🎯: openLink -> error', error);
     }
   };
+
+  const saveToAsync = async linkData => {
+    try {
+      if (typeof linkData !== 'string') {
+        console.log('🎯: Invalid link data. Expected a string.');
+        return;
+      }
+
+      // Retrieve the existing links from AsyncStorage
+      const existingLinks = await AsyncStorage.getItem('saveScannedLinks');
+
+      let linksArray = [];
+
+      if (existingLinks !== null) {
+        try {
+          // Attempt to parse the existing links to an array
+          linksArray = JSON.parse(existingLinks);
+
+          // Ensure it's an array
+          if (!Array.isArray(linksArray)) {
+            console.log(
+              '🎯: Existing data is not an array, initializing with an empty array',
+            );
+            linksArray = [];
+          }
+        } catch (e) {
+          console.log(
+            '🎯: Error parsing existing data, initializing with an empty array',
+            e,
+          );
+          linksArray = [];
+        }
+      }
+
+      // Append the new link to the array
+      linksArray.push(linkData);
+
+      // Save the updated array back to AsyncStorage
+      await AsyncStorage.setItem(
+        'saveScannedLinks',
+        JSON.stringify(linksArray),
+      );
+
+      console.log('🎯: Data saved successfully');
+    } catch (e) {
+      console.log('🎯: Error saving data', e);
+    }
+  };
   const onSuccess = e => {
     // console.log('🎯: HomeScreen -> e', e);
 
@@ -79,6 +128,7 @@ const HomeScreen = () => {
         text: LABELS.ok,
         onPress: () => {
           openLink({e});
+          saveToAsync(e.data);
         },
       },
     ]);

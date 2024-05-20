@@ -123,6 +123,10 @@ const GenerateQR = () => {
     // setModalVisible(false);
   };
 
+  const saveToAsync = async () => {
+    console.log('SAVE TOT ASUSSs');
+  };
+
   const errorHandler = () => {
     Alert.alert(LABELS.generateCodeError);
   };
@@ -137,6 +141,8 @@ const GenerateQR = () => {
       setCodeReady(true);
       setCodeType('QR');
     }, 1000);
+
+    saveToAsync();
   };
   const generateBarHandler = () => {
     console.log('🎯: generateBarHandler -> ');
@@ -148,6 +154,7 @@ const GenerateQR = () => {
       setCodeReady(true);
       setCodeType('BAR');
     }, 1000);
+    saveToAsync();
   };
 
   const askUser = () => {

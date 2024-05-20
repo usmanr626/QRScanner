@@ -6,6 +6,7 @@ import HomeScreen from '../screens/HomeScreen';
 import TabNavigation from './TabNavigation';
 import GenerateQR from '../screens/GenerateQR';
 import SettingsScreen from '../screens/SettingsScreen';
+import HistoryScreen from '../screens/HistoryScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -16,6 +17,7 @@ const AppNavigation = () => {
         <Stack.Group>
           <Stack.Screen name="Home" component={TabNavigation} />
           <Stack.Screen name="SettingsScreen" component={SettingsScreen} />
+          <Stack.Screen name="HistoryScreen" component={HistoryScreen} />
         </Stack.Group>
       </Stack.Navigator>
     </NavigationContainer>

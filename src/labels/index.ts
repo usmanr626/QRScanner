@@ -15,7 +15,9 @@ const ENGLISH = {
     pleaseEnter:'Please paste your text or link to generate a code',
     pleaseChoose:'Please choose',
     generateQR:'Generate QR Code',
-    generateBAR:'Generate BAR Code'
+    generateBAR:'Generate BAR Code',
+    myScannedCodes:'My Scanned Codes',
+    myGeneratedCodes:'My Generated Codes'
 }
 
 const SPANISH = {
