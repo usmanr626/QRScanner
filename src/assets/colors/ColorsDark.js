@@ -9,4 +9,7 @@ export default {
   primary: '#fff',
   grey5: 'grey',
   grey6: 'lightgrey',
+  primary: '#FFC3B1',
+  secondary: '#FFDAB9',
+  ternary: '#FFCDB9',
 };

@@ -183,6 +183,22 @@ const GenerateQR = () => {
       }
     : {};
 
+  const askToRemove = () => {
+    Alert.alert(LABELS.removeImage, '', [
+      {
+        text: LABELS.yes,
+        onPress: () => {
+          setUserImage(null);
+        },
+      },
+      {
+        text: LABELS.selectAnother,
+        onPress: () => {
+          imageHandler();
+        },
+      },
+    ]);
+  };
   return (
     <View style={styles.mainContainer}>
       <View style={{position: 'absolute', top: 0}}>
@@ -233,14 +249,14 @@ const GenerateQR = () => {
             }}
             activeOpacity={0.8}
             style={styles.buttonStyle}>
-            <Text numberOfLines={3} style={{textAlign: 'center'}}>
+            <Text numberOfLines={3} style={styles.buttonTextStyle}>
               {LABELS.selectImage}
             </Text>
           </TouchableOpacity>
         ) : (
           <TouchableOpacity
-            onLongPress={() => setUserImage(null)}
-            onPress={imageHandler}>
+            // onLongPress={() => setUserImage(null)}
+            onPress={userImage ? () => askToRemove() : imageHandler}>
             <Image
               source={{uri: userImage}}
               resizeMode="contain"
@@ -259,7 +275,7 @@ const GenerateQR = () => {
           onPress={() => (userImage ? errorHandler() : setFormatPicker(true))}
           activeOpacity={0.8}
           style={styles.buttonStyle}>
-          <Text numberOfLines={3} style={{textAlign: 'center'}}>
+          <Text numberOfLines={3} style={styles.buttonTextStyle}>
             {selectedFormat ? selectedFormat : LABELS.selectFormat}
           </Text>
         </TouchableOpacity>
@@ -280,35 +296,10 @@ const GenerateQR = () => {
           //   // interstitial.load(),
           //   interstitial.show();
           // }}
-          style={{
-            width: 250,
-            height: 80,
-            backgroundColor: 'pink',
-            justifyContent: 'center',
-            alignItems: 'center',
-            borderRadius: 20,
-          }}>
-          <Text>{LABELS.generate}</Text>
+          style={styles.generateButton}>
+          <Text style={styles.generateButtonText}>{LABELS.generate}</Text>
         </TouchableOpacity>
       </View>
-      {/* <QRCode
-        value="https://www.npmjs.com/package/@kichiyaki/react-native-barcode-generator"
-        // backgroundColor="grey"
-        size={120}
-        logo={{uri: userImage}}
-        logoSize={20}
-        logoMargin={1}
-        logoBackgroundColor="white"
-        quietZone={5}
-      /> */}
-
-      {/* <Barcode
-        format="CODE128"
-        value="0123456789012"
-        text="0123456789012"
-        style={{marginBottom: 40, backgroundColor: 'red'}}
-        maxWidth={200}
-      /> */}
 
       {formatPicker && (
         <Picker
@@ -320,26 +311,30 @@ const GenerateQR = () => {
             color="red"
             value={null}
           />
-          <Picker.Item color="black" label="CODE39" value="CODE39" />
-          <Picker.Item color="black" label="CODE128" value="CODE128" />
-          <Picker.Item color="black" label="CODE128A" value="CODE128A" />
-          <Picker.Item color="black" label="CODE128B" value="CODE128B" />
-          <Picker.Item color="black" label="CODE128C" value="CODE128C" />
-          <Picker.Item color="black" label="EAN13" value="EAN13" />
-          <Picker.Item color="black" label="EAN8" value="EAN8" />
-          <Picker.Item color="black" label="EAN5" value="EAN5" />
-          <Picker.Item color="black" label="EAN2" value="EAN2" />
-          <Picker.Item color="black" label="UPC" value="UPC" />
-          <Picker.Item color="black" label="UPCE" value="UPCE" />
-          <Picker.Item color="black" label="ITF14" value="ITF14" />
-          <Picker.Item color="black" label="ITF" value="ITF" />
-          <Picker.Item color="black" label="MSI" value="MSI" />
-          <Picker.Item color="black" label="MSI10" value="MSI10" />
-          <Picker.Item color="black" label="MSI11" value="MSI11" />
-          <Picker.Item color="black" label="MSI1010" value="MSI1010" />
-          <Picker.Item color="black" label="MSI1110" value="MSI1110" />
-          <Picker.Item color="black" label="pharmacode" value="pharmacode" />
-          <Picker.Item color="black" label="codabar" value="codabar" />
+          <Picker.Item color={colors.black} label="CODE39" value="CODE39" />
+          <Picker.Item color={colors.black} label="CODE128" value="CODE128" />
+          <Picker.Item color={colors.black} label="CODE128A" value="CODE128A" />
+          <Picker.Item color={colors.black} label="CODE128B" value="CODE128B" />
+          <Picker.Item color={colors.black} label="CODE128C" value="CODE128C" />
+          <Picker.Item color={colors.black} label="EAN13" value="EAN13" />
+          <Picker.Item color={colors.black} label="EAN8" value="EAN8" />
+          <Picker.Item color={colors.black} label="EAN5" value="EAN5" />
+          <Picker.Item color={colors.black} label="EAN2" value="EAN2" />
+          <Picker.Item color={colors.black} label="UPC" value="UPC" />
+          <Picker.Item color={colors.black} label="UPCE" value="UPCE" />
+          <Picker.Item color={colors.black} label="ITF14" value="ITF14" />
+          <Picker.Item color={colors.black} label="ITF" value="ITF" />
+          <Picker.Item color={colors.black} label="MSI" value="MSI" />
+          <Picker.Item color={colors.black} label="MSI10" value="MSI10" />
+          <Picker.Item color={colors.black} label="MSI11" value="MSI11" />
+          <Picker.Item color={colors.black} label="MSI1010" value="MSI1010" />
+          <Picker.Item color={colors.black} label="MSI1110" value="MSI1110" />
+          <Picker.Item
+            color={colors.black}
+            label="pharmacode"
+            value="pharmacode"
+          />
+          <Picker.Item color={colors.black} label="codabar" value="codabar" />
           {/* Add more Picker.Item components for additional formats */}
         </Picker>
       )}
@@ -393,19 +388,48 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     paddingHorizontal: 10,
   },
+  buttonTextStyle: {
+    textAlign: 'center',
+    fontWeight: '500',
+    color: colors.black,
+    fontSize: 16,
+    // letterSpacing: 0.3,
+  },
   pickerStyle: {
     height: 50,
     width: WIDTH,
     bottom: '10%',
+  },
+  generateButton: {
+    width: 250,
+    height: 80,
+    backgroundColor: '#FFCFA5',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 20,
+  },
+  generateButtonText: {
+    color: colors.black,
+    fontSize: 18,
+    fontWeight: '500',
+    letterSpacing: 1,
   },
   buttonStyle: {
     justifyContent: 'center',
     alignItems: 'center',
     width: WIDTH * 0.45,
     height: 120,
-    backgroundColor: colors.grey5,
+    backgroundColor: colors.primary,
     borderRadius: 20,
     padding: 5,
+    shadowColor: colors.black,
+    shadowOffset: {
+      width: 5,
+      height: 5,
+    },
+    shadowOpacity: 1,
+    shadowRadius: 12,
+    elevation: 10,
   },
   modalBackground: {
     flex: 1,

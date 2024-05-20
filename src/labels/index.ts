@@ -17,7 +17,10 @@ const ENGLISH = {
     generateQR:'Generate QR Code',
     generateBAR:'Generate BAR Code',
     myScannedCodes:'My Scanned Codes',
-    myGeneratedCodes:'My Generated Codes'
+    myGeneratedCodes:'My Generated Codes',
+    removeImage:'Remove Image?',
+    yes:'Yes',
+    selectAnother: 'Select Another Image'
 }
 
 const SPANISH = {

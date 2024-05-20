@@ -163,7 +163,7 @@ const HomeScreen = () => {
           onPress={toggleScanner}
           style={styles.scanButton}
           activeOpacity={0.7}>
-          <Text>{LABELS.touchToScan}</Text>
+          <Text style={styles.textStyle}>{LABELS.touchToScan}</Text>
         </TouchableOpacity>
       )}
       <SettingsButton onPress={() => navigation.navigate('SettingsScreen')} />
@@ -180,13 +180,30 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  textStyle: {
+    color: colors.black,
+    fontWeight: '500',
+    fontSize: 22,
+    letterSpacing: 1.5,
+  },
   scanButton: {
     width: WIDTH * 0.8,
     height: WIDTH * 1.1,
-    backgroundColor: colors.grey5,
+    // backgroundColor: '#FFDAB9', sec
+    // backgroundColor: '#FFC3B1', pri
+    // backgroundColor: '#FFCDB9', ter
+    backgroundColor: colors.primary,
     borderRadius: 20,
     justifyContent: 'center',
     alignItems: 'center',
+    shadowColor: colors.black,
+    shadowOffset: {
+      width: 5,
+      height: 5,
+    },
+    shadowOpacity: 1,
+    shadowRadius: 12,
+    elevation: 10,
   },
   scanner: {
     width: WIDTH * 0.8,
@@ -206,8 +223,9 @@ const styles = StyleSheet.create({
     color: '#000',
   },
   buttonText: {
-    fontSize: 21,
-    color: 'rgb(0,122,255)',
+    fontSize: 22,
+    color: colors.black,
+    letterSpacing: 1,
   },
   buttonTouchable: {
     padding: 16,
