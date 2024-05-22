@@ -1,7 +1,7 @@
 import Barcode from '@kichiyaki/react-native-barcode-generator';
 import {Picker} from '@react-native-picker/picker';
 import {useIsFocused, useNavigation, useRoute} from '@react-navigation/native';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {
   Alert,
   Image,
@@ -27,6 +27,8 @@ import {WIDTH} from '../assets/styles';
 import {LABELS, getLabels} from '../labels';
 
 import Config from 'react-native-config';
+import ViewShot from 'react-native-view-shot';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const adUnitId = __DEV__ ? Config.DEV_AD_UNIT_ID : Config.PROD_AD_UNIT_ID;
 const InterAdUnitId = __DEV__
@@ -58,6 +60,8 @@ const GenerateQR = () => {
 
   const [selectedFormat, setSelectedFormat] = useState(null);
   const [formatPicker, setFormatPicker] = useState(false);
+
+  const viewShotRef = useRef();
 
   useEffect(() => {
     // Update labels when screen is focused
@@ -123,10 +127,6 @@ const GenerateQR = () => {
     // setModalVisible(false);
   };
 
-  const saveToAsync = async () => {
-    console.log('SAVE TOT ASUSSs');
-  };
-
   const errorHandler = () => {
     Alert.alert(LABELS.generateCodeError);
   };
@@ -141,8 +141,9 @@ const GenerateQR = () => {
       setCodeReady(true);
       setCodeType('QR');
     }, 1000);
-
-    saveToAsync();
+    setTimeout(() => {
+      captureAndConvertToImage();
+    }, 1000);
   };
   const generateBarHandler = () => {
     console.log('🎯: generateBarHandler -> ');
@@ -154,7 +155,9 @@ const GenerateQR = () => {
       setCodeReady(true);
       setCodeType('BAR');
     }, 1000);
-    saveToAsync();
+    setTimeout(() => {
+      captureAndConvertToImage();
+    }, 1000);
   };
 
   const askUser = () => {
@@ -198,6 +201,75 @@ const GenerateQR = () => {
       },
     ]);
   };
+
+  const saveToAsync = async linkData => {
+    console.log('🎯: GenerateQR -> linkData', linkData);
+    try {
+      if (typeof linkData !== 'string') {
+        console.log('🎯: Invalid link data. Expected a string.');
+        return;
+      }
+
+      // Retrieve the existing links from AsyncStorage
+      const existingLinks = await AsyncStorage.getItem('savedGeneratedLinks');
+
+      let linksArray = [];
+
+      if (existingLinks !== null) {
+        try {
+          // Attempt to parse the existing links to an array
+          linksArray = JSON.parse(existingLinks);
+
+          // Ensure it's an array
+          if (!Array.isArray(linksArray)) {
+            console.log(
+              '🎯: Existing data is not an array, initializing with an empty array',
+            );
+            linksArray = [];
+          }
+        } catch (e) {
+          console.log(
+            '🎯: Error parsing existing data, initializing with an empty array',
+            e,
+          );
+          linksArray = [];
+        }
+      }
+
+      // Append the new link to the array
+      linksArray.push(linkData);
+
+      // Save the updated array back to AsyncStorage
+      await AsyncStorage.setItem(
+        'savedGeneratedLinks',
+        JSON.stringify(linksArray),
+      );
+
+      console.log('🎯: Data saved successfully');
+    } catch (e) {
+      console.log('🎯: Error saving data', e);
+    }
+  };
+
+  const captureAndConvertToImage = async () => {
+    try {
+      // setRemoveBorder(true);
+
+      console.log('HERHE');
+
+      const uri = await viewShotRef.current.capture();
+      // Now 'uri' contains the captured image of the TextInput
+
+      // You can use the captured image URI to display it or save it as needed.
+      console.log('Image VIEW SHOT', uri);
+
+      saveToAsync(uri);
+
+      // setRemoveBorder(false);
+    } catch (error) {
+      console.error('Error capturing the view: ', error);
+    }
+  };
   return (
     <View style={styles.mainContainer}>
       <View style={{position: 'absolute', top: 0}}>
@@ -209,21 +281,6 @@ const GenerateQR = () => {
 
       <SafeAreaView />
 
-      {/* <QRCode
-        value="https://www.npmjs.com/package/@kichiyaki/react-native-barcode-generator"
-        // backgroundColor="grey"
-        size={250}
-        logo={ImagePath.settingsIcon}
-        logoSize={40}
-        logoBackgroundColor="white"
-      />
-      <Barcode
-        format="CODE128"
-        value="0123456789012"
-        text="0123456789012"
-        style={{marginBottom: 40, backgroundColor: 'red'}}
-        maxWidth={200}
-      /> */}
       <SettingsButton onPress={() => navigation.navigate('SettingsScreen')} />
 
       <View style={{paddingTop: 100}} />
@@ -346,13 +403,15 @@ const GenerateQR = () => {
         <View style={styles.modalMainContainer}>
           <View style={styles.modalInnerContainer}>
             {codeType === 'QR' ? (
-              <QRCode
-                value={inputText}
-                // backgroundColor="grey"
-                size={120}
-                {...logoProps}
-                quietZone={10}
-              />
+              <ViewShot ref={viewShotRef} options={{format: 'png', quality: 1}}>
+                <QRCode
+                  value={inputText}
+                  // backgroundColor="grey"
+                  size={120}
+                  {...logoProps}
+                  quietZone={10}
+                />
+              </ViewShot>
             ) : codeType === 'BAR' ? (
               <Barcode
                 format={selectedFormat ? selectedFormat : 'CODE128'}
@@ -362,6 +421,11 @@ const GenerateQR = () => {
                 maxWidth={200}
               />
             ) : null}
+            <TouchableOpacity
+              // onPress={captureAndConvertToImage}
+              style={styles.saveToGalleryButtonStyle}>
+              <Text style={styles.buttonTextStyle}>{LABELS.saveToGallery}</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </Modal>
@@ -411,6 +475,24 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: WIDTH * 0.45,
     height: 120,
+    backgroundColor: colors.secondary,
+    borderRadius: 20,
+    padding: 5,
+    shadowColor: colors.black,
+    shadowOffset: {
+      width: 5,
+      height: 5,
+    },
+    shadowOpacity: 1,
+    shadowRadius: 12,
+    elevation: 10,
+  },
+  saveToGalleryButtonStyle: {
+    top: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: WIDTH * 0.45,
+    height: 60,
     backgroundColor: colors.secondary,
     borderRadius: 20,
     padding: 5,

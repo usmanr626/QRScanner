@@ -20,7 +20,8 @@ const ENGLISH = {
     myGeneratedCodes:'My Generated Codes',
     removeImage:'Remove Image?',
     yes:'Yes',
-    selectAnother: 'Select Another Image'
+    selectAnother: 'Select Another Image',
+    saveToGallery:'Save To Gallery'
 }
 
 const SPANISH = {

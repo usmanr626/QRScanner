@@ -9,7 +9,7 @@ const BackButton = ({onPress}) => {
       onPress={onPress}
       style={{
         position: 'absolute',
-
+        zIndex: 1,
         // backgroundColor: 'red',
         top: WIDTH * 0.18,
         left: WIDTH * 0.05,

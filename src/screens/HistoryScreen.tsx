@@ -2,6 +2,7 @@ import {Picker} from '@react-native-picker/picker'; // Import Picker from @react
 import React, {useEffect, useState} from 'react';
 import {
   FlatList,
+  Image,
   Linking,
   StyleSheet,
   Text,
@@ -32,6 +33,7 @@ const HistoryScreen = () => {
   }, []);
 
   const getData = async () => {
+    console.log('🎯: getData -> getData');
     try {
       const value = await AsyncStorage.getItem(
         params.showCode === 'scanned'
@@ -59,7 +61,14 @@ const HistoryScreen = () => {
             console.error('An error occured', err),
           )
         }
-        style={styles.linkComponentStyle}>
+        style={
+          params?.showCode === 'generated'
+            ? styles.linkComponentWithImageStyle
+            : styles.linkComponentStyle
+        }>
+        {params?.showCode === 'generated' && (
+          <Image source={{uri: linkData}} style={{width: 45, height: 45}} />
+        )}
         <Text style={styles.linkTextStyle}>{linkData}</Text>
       </TouchableOpacity>
     );
@@ -96,12 +105,26 @@ const styles = StyleSheet.create({
   },
   linkComponentStyle: {
     backgroundColor: colors.secondary,
-    height: 50,
+    // height: 50,
     minWidth: '90%',
     maxWidth: '90%',
     justifyContent: 'center',
     borderRadius: 20,
     padding: 10,
+    marginTop: '5%',
+    alignItems: 'center',
+  },
+  linkComponentWithImageStyle: {
+    backgroundColor: colors.secondary,
+    flexDirection: 'row',
+    // height: 50,
+    minWidth: '90%',
+    maxWidth: '90%',
+    justifyContent: 'space-between',
+
+    borderRadius: 20,
+    padding: 10,
+    paddingHorizontal: 20,
     marginTop: '5%',
     alignItems: 'center',
   },
