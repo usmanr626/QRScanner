@@ -179,7 +179,6 @@ const GenerateQR = () => {
         logoSize: 20,
         logoMargin: 1,
         logoBackgroundColor: 'white',
-        quietZone: 5,
       }
     : {};
 
@@ -344,22 +343,15 @@ const GenerateQR = () => {
         transparent={codeReady}
         visible={codeReady}
         onRequestClose={() => setCodeReady(false)}>
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-          <View
-            style={{
-              width: WIDTH * 0.9,
-              height: '95%',
-              borderRadius: 40,
-              backgroundColor: 'lightgrey',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
+        <View style={styles.modalMainContainer}>
+          <View style={styles.modalInnerContainer}>
             {codeType === 'QR' ? (
               <QRCode
                 value={inputText}
                 // backgroundColor="grey"
                 size={120}
                 {...logoProps}
+                quietZone={10}
               />
             ) : codeType === 'BAR' ? (
               <Barcode
@@ -403,7 +395,7 @@ const styles = StyleSheet.create({
   generateButton: {
     width: 250,
     height: 80,
-    backgroundColor: '#FFCFA5',
+    backgroundColor: colors.primary,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 20,
@@ -419,7 +411,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: WIDTH * 0.45,
     height: 120,
-    backgroundColor: colors.primary,
+    backgroundColor: colors.secondary,
     borderRadius: 20,
     padding: 5,
     shadowColor: colors.black,
@@ -448,5 +440,14 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 20,
     top: 100,
+  },
+  modalMainContainer: {flex: 1, justifyContent: 'center', alignItems: 'center'},
+  modalInnerContainer: {
+    width: WIDTH * 0.9,
+    height: '95%',
+    borderRadius: 40,
+    backgroundColor: colors.grey6,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

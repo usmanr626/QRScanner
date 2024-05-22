@@ -36,12 +36,16 @@ const SPANISH = {
     selectImage:'Seleccionar una imagen (opcional), solo para código QR',
     selectFormat:'Seleccionar un formato de código (predeterminado CODE128), solo para código de barras',
     removeSelectedCode: 'Eliminar el código seleccionado',
-generateCodeError: 'Solo puedes elegir generar un tipo de código a la vez',
-pleaseEnter: 'Por favor, pega tu texto o enlace para generar un código',
-pleaseChoose: 'Por favor, elige',
-generateQR: 'Generar código QR',
-generateBAR: 'Generar código de barras'
-
+    generateCodeError: 'Solo puedes elegir generar un tipo de código a la vez',
+    pleaseEnter: 'Por favor, pega tu texto o enlace para generar un código',
+    pleaseChoose: 'Por favor, elige',
+    generateQR: 'Generar código QR',
+    generateBAR: 'Generar código de barras',
+    myScannedCodes: 'Mis Códigos Escaneados',
+    myGeneratedCodes: 'Mis Códigos Generados',
+    removeImage: '¿Eliminar Imagen?',
+    yes: 'Sí',
+    selectAnother: 'Seleccionar Otra Imagen'
 }
 
 const CHINESE = {
@@ -59,10 +63,14 @@ const CHINESE = {
     removeSelectedCode: '删除选定的代码',
     generateCodeError: '您一次只能选择生成一种代码',
     pleaseEnter: '请粘贴您的文本或链接以生成代码',
-pleaseChoose: '请选择',
-generateQR: '生成二维码',
-generateBAR: '生成条形码'
-
+    pleaseChoose: '请选择',
+    generateQR: '生成二维码',
+    generateBAR: '生成条形码',
+    myScannedCodes: '我的扫描代码',
+    myGeneratedCodes: '我生成的代码',
+    removeImage: '移除图片？',
+    yes: '是',
+    selectAnother: '选择另一个图像'
 }
 
 const GERMAN = {
@@ -82,7 +90,13 @@ const GERMAN = {
     pleaseEnter: 'Bitte fügen Sie Ihren Text oder Link ein, um einen Code zu generieren',
 pleaseChoose: 'Bitte wählen',
 generateQR: 'QR-Code generieren',
-generateBAR: 'Strichcode generieren'
+generateBAR: 'Strichcode generieren',
+myScannedCodes: 'Meine gescannten Codes',
+myGeneratedCodes: 'Meine generierten Codes',
+removeImage: 'Bild entfernen?',
+yes: 'Ja',
+selectAnother: 'Ein anderes Bild auswählen'
+
 
 
 }
@@ -104,7 +118,13 @@ const ARABIC = {
     pleaseEnter: 'يرجى لصق النص أو الرابط لتوليد كود',
 pleaseChoose: 'يرجى الاختيار',
 generateQR: 'توليد رمز الاستجابة السريعة',
-generateBAR: 'توليد رمز شريطي'
+generateBAR: 'توليد رمز شريطي',
+myScannedCodes: 'أكواد المسح الخاصة بي',
+myGeneratedCodes: 'أكواد التوليد الخاصة بي',
+removeImage: 'إزالة الصورة؟',
+yes: 'نعم',
+selectAnother: 'اختر صورة أخرى'
+
 
 
 }
@@ -126,7 +146,13 @@ const PORTUGUESE = {
     pleaseEnter: 'Por favor, cole seu texto ou link para gerar um código',
 pleaseChoose: 'Por favor, escolha',
 generateQR: 'Gerar código QR',
-generateBAR: 'Gerar código de barras'
+generateBAR: 'Gerar código de barras',
+myScannedCodes: 'Meus Códigos Escaneados',
+myGeneratedCodes: 'Meus Códigos Gerados',
+removeImage: 'Remover Imagem?',
+yes: 'Sim',
+selectAnother: 'Selecionar Outra Imagem'
+
 
 
 }
@@ -148,7 +174,13 @@ const FRENCH = {
     pleaseEnter: 'Veuillez coller votre texte ou lien pour générer un code',
 pleaseChoose: 'Veuillez choisir',
 generateQR: 'Générer un code QR',
-generateBAR: 'Générer un code-barres'
+generateBAR: 'Générer un code-barres',
+myScannedCodes: 'Mes Codes Scannés',
+myGeneratedCodes: 'Mes Codes Générés',
+removeImage: 'Supprimer l\'image?',
+yes: 'Oui',
+selectAnother: 'Sélectionner une autre image'
+
 
     
 

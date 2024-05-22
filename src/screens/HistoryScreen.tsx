@@ -59,53 +59,56 @@ const HistoryScreen = () => {
             console.error('An error occured', err),
           )
         }
-        style={{
-          backgroundColor: 'pink',
-          height: 50,
-          width: '100%',
-          justifyContent: 'center',
-          borderRadius: 20,
-          paddingHorizontal: 20,
-          marginTop: '5%',
-        }}>
-        <Text style={{color: 'black'}}>{linkData}</Text>
+        style={styles.linkComponentStyle}>
+        <Text style={styles.linkTextStyle}>{linkData}</Text>
       </TouchableOpacity>
     );
   };
 
   return (
-    <>
-      <View style={styles.mainContainer}>
-        {/* <View style={{position: 'absolute', top: 0}}> */}
-        <BannerAd
-          unitId={adUnitId}
-          size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}
-        />
-        <BackButton onPress={() => navigation.goBack()} />
-        <View
-          style={{
-            top: '12%',
-            padding: 10,
-            // width: '100%',
-            alignItems: 'center',
-            // backgroundColor: 'orange',
-          }}>
-          <FlatList
-            contentContainerStyle={{paddingBottom: '50%', width: '100%'}}
-            horizontal={false}
-            data={linkData}
-            showsVerticalScrollIndicator={false}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({item}) => <LinkComponent linkData={item} />}
-          />
-        </View>
-      </View>
-      {/* </View> */}
-    </>
+    <View style={styles.mainContainer}>
+      {/* <View style={{position: 'absolute', top: 0}}> */}
+      <BannerAd
+        unitId={adUnitId}
+        size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}
+      />
+      <BackButton onPress={() => navigation.goBack()} />
+
+      <FlatList
+        contentContainerStyle={styles.flatlistContentContainer}
+        horizontal={false}
+        data={linkData}
+        showsVerticalScrollIndicator={false}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={({item}) => <LinkComponent linkData={item} />}
+      />
+    </View>
   );
 };
 export default HistoryScreen;
 
 const styles = StyleSheet.create({
   mainContainer: {flex: 1, backgroundColor: colors.white},
+  flatlistContentContainer: {
+    paddingBottom: '50%',
+    alignItems: 'center',
+    top: '12%',
+  },
+  linkComponentStyle: {
+    backgroundColor: colors.secondary,
+    height: 50,
+    minWidth: '90%',
+    maxWidth: '90%',
+    justifyContent: 'center',
+    borderRadius: 20,
+    padding: 10,
+    marginTop: '5%',
+    alignItems: 'center',
+  },
+  linkTextStyle: {
+    textAlign: 'center',
+    fontWeight: '500',
+    color: colors.black,
+    fontSize: 16,
+  },
 });

@@ -36,11 +36,11 @@ const SettingsScreen = () => {
           onPress={() => navigation.navigate('Home', {selectedLanguage})}
         />
 
-        <View style={{marginTop: '35%'}}>
+        <View style={styles.topMargin}>
           <Text>{LABELS.selectLanguage}</Text>
           <Picker
             selectedValue={selectedLanguage}
-            style={{height: 50, width: '100%'}}
+            style={styles.pickerStyle}
             onValueChange={(itemValue, itemIndex) =>
               handleLanguageChange(itemValue)
             }>
@@ -53,41 +53,22 @@ const SettingsScreen = () => {
             <Picker.Item label="Français" value="French" />
           </Picker>
         </View>
-        <View
-          style={{
-            alignItems: 'center',
-            top: '12%',
-            width: '100%',
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-          }}>
+        <View style={styles.buttonContainer}>
           <TouchableOpacity
             onPress={() => {
               navigation.navigate('HistoryScreen', {showCode: 'scanned'});
             }}
-            style={{
-              height: 80,
-              width: '45%',
-              backgroundColor: 'pink',
-              justifyContent: 'center',
-              alignItems: 'center',
-              borderRadius: 20,
-            }}>
-            <Text>{LABELS.myScannedCodes}</Text>
+            style={styles.buttonStyle}>
+            <Text style={styles.buttonTextStyle}>{LABELS.myScannedCodes}</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
               navigation.navigate('HistoryScreen', {showCode: 'generated'});
             }}
-            style={{
-              height: 80,
-              width: '45%',
-              backgroundColor: 'pink',
-              justifyContent: 'center',
-              alignItems: 'center',
-              borderRadius: 20,
-            }}>
-            <Text>{LABELS.myGeneratedCodes}</Text>
+            style={styles.buttonStyle}>
+            <Text style={styles.buttonTextStyle}>
+              {LABELS.myGeneratedCodes}
+            </Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -98,4 +79,27 @@ export default SettingsScreen;
 
 const styles = StyleSheet.create({
   mainContainer: {flex: 1, padding: 20, backgroundColor: colors.white},
+  buttonContainer: {
+    alignItems: 'center',
+    top: '12%',
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  topMargin: {marginTop: '35%'},
+  pickerStyle: {height: 50, width: '100%'},
+  buttonStyle: {
+    height: 80,
+    width: '45%',
+    backgroundColor: colors.primary,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 20,
+  },
+  buttonTextStyle: {
+    textAlign: 'center',
+    fontWeight: '500',
+    color: colors.black,
+    fontSize: 16,
+  },
 });
