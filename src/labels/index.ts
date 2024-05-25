@@ -21,7 +21,10 @@ const ENGLISH = {
     removeImage:'Remove Image?',
     yes:'Yes',
     selectAnother: 'Select Another Image',
-    saveToGallery:'Save To Gallery'
+    saveToGallery:'Save To Gallery',
+    noData:'You dont have any saved codes',
+    generatedOn:'Generated on: ',
+    at:'at'
 }
 
 const SPANISH = {
@@ -46,7 +49,10 @@ const SPANISH = {
     myGeneratedCodes: 'Mis Códigos Generados',
     removeImage: '¿Eliminar Imagen?',
     yes: 'Sí',
-    selectAnother: 'Seleccionar Otra Imagen'
+    selectAnother: 'Seleccionar Otra Imagen',
+    noData: 'No tienes ningún código guardado',
+    generatedOn: 'Generado el:',
+    at: 'en' 
 }
 
 const CHINESE = {
@@ -71,7 +77,11 @@ const CHINESE = {
     myGeneratedCodes: '我生成的代码',
     removeImage: '移除图片？',
     yes: '是',
-    selectAnother: '选择另一个图像'
+    selectAnother: '选择另一个图像',
+    noData: '您没有任何保存的代码',
+    generatedOn: '生成于:',
+    at: 'at' 
+
 }
 
 const GERMAN = {
@@ -89,16 +99,17 @@ const GERMAN = {
     removeSelectedCode: 'Ausgewählten Code entfernen',
     generateCodeError: 'Sie können jeweils nur eine Art von Code generieren',
     pleaseEnter: 'Bitte fügen Sie Ihren Text oder Link ein, um einen Code zu generieren',
-pleaseChoose: 'Bitte wählen',
-generateQR: 'QR-Code generieren',
-generateBAR: 'Strichcode generieren',
-myScannedCodes: 'Meine gescannten Codes',
-myGeneratedCodes: 'Meine generierten Codes',
-removeImage: 'Bild entfernen?',
-yes: 'Ja',
-selectAnother: 'Ein anderes Bild auswählen'
-
-
+    pleaseChoose: 'Bitte wählen',
+    generateQR: 'QR-Code generieren',
+    generateBAR: 'Strichcode generieren',
+    myScannedCodes: 'Meine gescannten Codes',
+    myGeneratedCodes: 'Meine generierten Codes',
+    removeImage: 'Bild entfernen?',
+    yes: 'Ja',
+    selectAnother: 'Ein anderes Bild auswählen',
+    noData: 'Sie haben keine gespeicherten Codes',
+    generatedOn: 'Erstellt am:',
+    at: 'um' 
 
 }
 
@@ -110,24 +121,24 @@ const ARABIC = {
     ok: 'موافق',
     touchToScan: 'اضغط هنا للمسح',
     selectLanguage:'تحديد اللغة',
-    pasteLink: "الصق الرابط أو النص هنا"
-    ,generate: "توليد",
+    pasteLink: "الصق الرابط أو النص هنا",
+    generate: "توليد",
     selectImage:"اختر صورة (اختياري)، فقط لرمز الاستجابة السريعة",
     selectFormat:"اختر تنسيق الرمز (الافتراضي CODE128)، فقط لرمز الباركود",
     removeSelectedCode: 'إزالة الكود المحدد',
     generateCodeError: 'يمكنك اختيار توليد نوع واحد فقط من الأكواد في المرة الواحدة',
     pleaseEnter: 'يرجى لصق النص أو الرابط لتوليد كود',
-pleaseChoose: 'يرجى الاختيار',
-generateQR: 'توليد رمز الاستجابة السريعة',
-generateBAR: 'توليد رمز شريطي',
-myScannedCodes: 'أكواد المسح الخاصة بي',
-myGeneratedCodes: 'أكواد التوليد الخاصة بي',
-removeImage: 'إزالة الصورة؟',
-yes: 'نعم',
-selectAnother: 'اختر صورة أخرى'
-
-
-
+    pleaseChoose: 'يرجى الاختيار',
+    generateQR: 'توليد رمز الاستجابة السريعة',
+    generateBAR: 'توليد رمز شريطي',
+    myScannedCodes: 'أكواد المسح الخاصة بي',
+    myGeneratedCodes: 'أكواد التوليد الخاصة بي',
+    removeImage: 'إزالة الصورة؟',
+    yes: 'نعم',
+    selectAnother: 'اختر صورة أخرى',
+    noData: 'ليس لديك أي رموز محفوظة',
+    generatedOn: 'تم الإنشاء في:',
+    at:'في'
 }
 
 const PORTUGUESE = {
@@ -138,24 +149,24 @@ const PORTUGUESE = {
     ok: 'OK',
     touchToScan: 'Toque aqui para escanear',
     selectLanguage:'Selecionar idioma',
-    pasteLink:'Cole o seu link ou texto aqui'
-    ,generate: 'gerar',
+    pasteLink:'Cole o seu link ou texto aqui',
+    generate: 'gerar',
     selectImage:"Selecionar uma imagem (opcional), apenas para código QR",
     selectFormat:"Selecionar um formato de código (padrão CODE128), apenas para código de barras",
     removeSelectedCode: 'Remover código selecionado',
     generateCodeError: 'Você só pode escolher gerar um tipo de código por vez',
     pleaseEnter: 'Por favor, cole seu texto ou link para gerar um código',
-pleaseChoose: 'Por favor, escolha',
-generateQR: 'Gerar código QR',
-generateBAR: 'Gerar código de barras',
-myScannedCodes: 'Meus Códigos Escaneados',
-myGeneratedCodes: 'Meus Códigos Gerados',
-removeImage: 'Remover Imagem?',
-yes: 'Sim',
-selectAnother: 'Selecionar Outra Imagem'
-
-
-
+    pleaseChoose: 'Por favor, escolha',
+    generateQR: 'Gerar código QR',
+    generateBAR: 'Gerar código de barras',
+    myScannedCodes: 'Meus Códigos Escaneados',
+    myGeneratedCodes: 'Meus Códigos Gerados',
+    removeImage: 'Remover Imagem?',
+    yes: 'Sim',
+    selectAnother: 'Selecionar Outra Imagem',
+    noData: 'Você não tem nenhum código salvo',
+    generatedOn: 'Gerado em:',
+    at: 'em' 
 }
 
 const FRENCH = {
@@ -173,18 +184,17 @@ const FRENCH = {
     removeSelectedCode: 'Supprimer le code sélectionné',
     generateCodeError: 'Vous ne pouvez choisir de générer qu\'un seul type de code à la fois',
     pleaseEnter: 'Veuillez coller votre texte ou lien pour générer un code',
-pleaseChoose: 'Veuillez choisir',
-generateQR: 'Générer un code QR',
-generateBAR: 'Générer un code-barres',
-myScannedCodes: 'Mes Codes Scannés',
-myGeneratedCodes: 'Mes Codes Générés',
-removeImage: 'Supprimer l\'image?',
-yes: 'Oui',
-selectAnother: 'Sélectionner une autre image'
-
-
-    
-
+    pleaseChoose: 'Veuillez choisir',
+    generateQR: 'Générer un code QR',
+    generateBAR: 'Générer un code-barres',
+    myScannedCodes: 'Mes Codes Scannés',
+    myGeneratedCodes: 'Mes Codes Générés',
+    removeImage: 'Supprimer l\'image?',
+    yes: 'Oui',
+    selectAnother: 'Sélectionner une autre image',
+    noData: `Vous n'avez aucun code enregistré`,
+    generatedOn: 'Généré le:',
+    at: 'à' 
 }
 
  export const getLabels = (language) => {

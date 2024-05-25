@@ -19,7 +19,10 @@ import {
   BannerAdSize,
   InterstitialAd,
 } from 'react-native-google-mobile-ads';
-import {launchImageLibrary} from 'react-native-image-picker';
+import {
+  launchImageLibrary,
+  ImageLibraryOptions,
+} from 'react-native-image-picker';
 import QRCode from 'react-native-qrcode-svg';
 import SettingsButton from '../Components/SettingsButton';
 import colors from '../assets/colors';
@@ -106,6 +109,13 @@ const GenerateQR = () => {
     return unsubscribe;
   }, [reloadAd]);
 
+  useEffect(() => {
+    if (codeReady) {
+      // console.log('🎯: GenerateQR -> codeReady', codeReady);
+      captureAndConvertToImage();
+    }
+  }, [codeReady]);
+
   const imageHandler = async () => {
     const result = await launchImageLibrary({
       mediaType: 'photo',
@@ -141,9 +151,9 @@ const GenerateQR = () => {
       setCodeReady(true);
       setCodeType('QR');
     }, 1000);
-    setTimeout(() => {
-      captureAndConvertToImage();
-    }, 1000);
+    // setTimeout(() => {
+    //   captureAndConvertToImage();
+    // }, 1000);
   };
   const generateBarHandler = () => {
     console.log('🎯: generateBarHandler -> ');
@@ -155,9 +165,9 @@ const GenerateQR = () => {
       setCodeReady(true);
       setCodeType('BAR');
     }, 1000);
-    setTimeout(() => {
-      captureAndConvertToImage();
-    }, 1000);
+    // setTimeout(() => {
+    //   captureAndConvertToImage();
+    // }, 1000);
   };
 
   const askUser = () => {
@@ -210,6 +220,27 @@ const GenerateQR = () => {
         return;
       }
 
+      // Get the current date and time
+      const currentDate = new Date();
+      const formattedDate = currentDate
+        .toLocaleDateString('en-GB', {
+          day: '2-digit',
+          month: 'short',
+          year: 'numeric',
+        })
+        .replace(/ /g, ' '); // '23 May 2024'
+      const formattedTime = currentDate
+        .toLocaleTimeString('en-US', {
+          hour: '2-digit',
+          minute: '2-digit',
+          hour12: true,
+        })
+        .toLowerCase(); // '12:40 am'
+      const formattedDateTime = `${formattedDate} ${LABELS.at} ${formattedTime}`;
+
+      // Append the date and time to the link data
+      const linkDataWithDateTime = `${linkData} - ${formattedDateTime}`;
+
       // Retrieve the existing links from AsyncStorage
       const existingLinks = await AsyncStorage.getItem('savedGeneratedLinks');
 
@@ -237,7 +268,7 @@ const GenerateQR = () => {
       }
 
       // Append the new link to the array
-      linksArray.push(linkData);
+      linksArray.push(linkDataWithDateTime);
 
       // Save the updated array back to AsyncStorage
       await AsyncStorage.setItem(
@@ -402,8 +433,8 @@ const GenerateQR = () => {
         onRequestClose={() => setCodeReady(false)}>
         <View style={styles.modalMainContainer}>
           <View style={styles.modalInnerContainer}>
-            {codeType === 'QR' ? (
-              <ViewShot ref={viewShotRef} options={{format: 'png', quality: 1}}>
+            <ViewShot ref={viewShotRef} options={{format: 'png', quality: 1}}>
+              {codeType === 'QR' ? (
                 <QRCode
                   value={inputText}
                   // backgroundColor="grey"
@@ -411,16 +442,16 @@ const GenerateQR = () => {
                   {...logoProps}
                   quietZone={10}
                 />
-              </ViewShot>
-            ) : codeType === 'BAR' ? (
-              <Barcode
-                format={selectedFormat ? selectedFormat : 'CODE128'}
-                value={inputText}
-                text={inputText}
-                style={{marginBottom: 40}}
-                maxWidth={200}
-              />
-            ) : null}
+              ) : codeType === 'BAR' ? (
+                <Barcode
+                  format={selectedFormat ? selectedFormat : 'CODE128'}
+                  value={inputText}
+                  text={inputText}
+                  style={{marginBottom: 40}}
+                  maxWidth={200}
+                />
+              ) : null}
+            </ViewShot>
             <TouchableOpacity
               // onPress={captureAndConvertToImage}
               style={styles.saveToGalleryButtonStyle}>
