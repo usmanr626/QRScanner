@@ -24,7 +24,8 @@ const ENGLISH = {
     saveToGallery:'Save To Gallery',
     noData:'You dont have any saved codes',
     generatedOn:'Generated on: ',
-    at:'at'
+    at:'at',
+    savedToGallery:'Saved to gallery'
 }
 
 const SPANISH = {

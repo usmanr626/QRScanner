@@ -1,17 +1,21 @@
 import Barcode from '@kichiyaki/react-native-barcode-generator';
 import {Picker} from '@react-native-picker/picker';
+
 import {useIsFocused, useNavigation, useRoute} from '@react-navigation/native';
 import React, {useEffect, useRef, useState} from 'react';
 import {
   Alert,
   Image,
   Modal,
+  Platform,
+  PermissionsAndroid,
   SafeAreaView,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
   View,
+  ToastAndroid,
 } from 'react-native';
 import {
   AdEventType,
@@ -32,6 +36,7 @@ import {LABELS, getLabels} from '../labels';
 import Config from 'react-native-config';
 import ViewShot from 'react-native-view-shot';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {CameraRoll} from '@react-native-camera-roll/camera-roll';
 
 const adUnitId = __DEV__ ? Config.DEV_AD_UNIT_ID : Config.PROD_AD_UNIT_ID;
 const InterAdUnitId = __DEV__
@@ -55,6 +60,7 @@ const GenerateQR = () => {
   const [codeReady, setCodeReady] = useState(false);
   const [inputText, setInputText] = useState('');
   const [codeType, setCodeType] = useState('');
+  const [imageUri, setImageUri] = useState('');
 
   //for ad
 
@@ -282,6 +288,38 @@ const GenerateQR = () => {
     }
   };
 
+  const checkAndroidPermission = async () => {
+    try {
+      const permission = PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE;
+      await PermissionsAndroid.request(permission);
+      Promise.resolve();
+    } catch (error) {
+      Promise.reject(error);
+    }
+  };
+
+  const captureAndSaveToGallery = async () => {
+    console.log('🎯: captureAndSaveToGallery ->imageUri ', imageUri);
+    try {
+      // setRemoveBorder(true);
+
+      if (Platform.OS === 'android') {
+        await checkAndroidPermission();
+      }
+
+      CameraRoll.saveAsset(imageUri, {type: 'photo', album: 'QR-BarCode'});
+
+      ToastAndroid.showWithGravity(
+        LABELS.savedToGallery,
+        ToastAndroid.SHORT,
+        ToastAndroid.CENTER,
+      );
+
+      setCodeReady(false);
+    } catch (error) {
+      console.error('Error capturing the view: ', error);
+    }
+  };
   const captureAndConvertToImage = async () => {
     try {
       // setRemoveBorder(true);
@@ -289,6 +327,7 @@ const GenerateQR = () => {
       console.log('HERHE');
 
       const uri = await viewShotRef.current.capture();
+      setImageUri(uri);
       // Now 'uri' contains the captured image of the TextInput
 
       // You can use the captured image URI to display it or save it as needed.
@@ -453,7 +492,7 @@ const GenerateQR = () => {
               ) : null}
             </ViewShot>
             <TouchableOpacity
-              // onPress={captureAndConvertToImage}
+              onPress={captureAndSaveToGallery}
               style={styles.saveToGalleryButtonStyle}>
               <Text style={styles.buttonTextStyle}>{LABELS.saveToGallery}</Text>
             </TouchableOpacity>
